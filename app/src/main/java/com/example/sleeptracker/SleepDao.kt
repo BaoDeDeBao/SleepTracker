@@ -6,13 +6,13 @@ import androidx.room.*
 @Dao
 interface SleepDao {
     @Insert
-    suspend fun insertSleep(sleep: Sleep) //suspend - Separate two tracks
+    suspend fun insertSleep(sleep: Sleep) //suspend - Separate two tracks and perform at back ground
 
     @Query("SELECT * FROM sleep")
-    suspend fun getSleep() : LiveData<List<Sleep>>
+    fun getSleep() : LiveData<List<Sleep>>
 
     @Query("SELECT * FROM sleep WHERE id = :sleep_id")
-    suspend fun getASleep(sleep_id: Int)
+    fun getASleep(sleep_id: Int): Sleep
 
     @Update
     suspend fun updateSleep(sleep: Sleep)

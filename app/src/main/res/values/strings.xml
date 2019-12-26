@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Sleep Tracker</string>
     <string name="action_settings">Settings</string>
+    <string name="quality">Quality</string>
+    <string name="save">Save</string>
+    <string name="startDate">Start Date</string>
+    <string name="endDate">End Date</string>
 </resources>

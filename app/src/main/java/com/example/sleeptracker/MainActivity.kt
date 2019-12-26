@@ -1,7 +1,8 @@
 package com.example.sleeptracker
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -16,9 +17,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            intent = Intent(this, AddActity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(requestCode == REQUEST_CODE) {
+            if(requestCode == Activity.RESULT_OK) {
+
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -35,5 +46,9 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    companion object{
+        const val REQUEST_CODE = 1
     }
 }
