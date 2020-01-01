@@ -9,4 +9,8 @@ class AddActity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_actity)
     }
+
+    companion object {
+        const val EXTRA_REPLY = "com.example.sleeptracker.REPLY"
+    }
 }

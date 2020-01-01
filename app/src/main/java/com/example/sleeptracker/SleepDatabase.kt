@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.time.Instant
 
 @Database(entities = [Sleep::class], version = 1)
@@ -35,6 +38,31 @@ abstract class SleepDatabase: RoomDatabase() {
 
                 return instance
             }
+        }
+    }
+
+    private class SleepDatabaseCallback(
+        private val scope: CoroutineScope
+    ) : RoomDatabase.Callback() {
+
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                scope.launch {
+                    populateDatabase(database.sleepDao())
+                }
+            }
+        }
+
+        suspend fun populateDatabase(sleepDao: SleepDao) {
+
+            // Add sample words.
+            var sleep = Sleep(1, System.currentTimeMillis(), System.currentTimeMillis(), 3)
+            sleepDao.insertSleep(sleep)
+            sleep = Sleep(2, System.currentTimeMillis(), System.currentTimeMillis(), 2)
+            sleepDao.insertSleep(sleep)
+
+            // TODO: Add your own words!
         }
     }
 }

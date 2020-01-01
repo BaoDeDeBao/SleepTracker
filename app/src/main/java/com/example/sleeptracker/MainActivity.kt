@@ -6,10 +6,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var sleepViewModel: SleepViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +29,16 @@ class MainActivity : AppCompatActivity() {
 
         if(requestCode == REQUEST_CODE) {
             if(requestCode == Activity.RESULT_OK) {
+                data?.getStringExtra(AddActity.EXTRA_REPLY)?.let {
+                    val sleep = Sleep(4,  System.currentTimeMillis(), System.currentTimeMillis(), 5)
+                    sleepViewModel.insert(sleep)
+                }
+            }
+            else {
 
             }
         }
-
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
