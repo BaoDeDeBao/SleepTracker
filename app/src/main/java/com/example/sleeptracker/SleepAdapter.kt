@@ -24,10 +24,12 @@ class SleepAdapter internal constructor(
     override fun onBindViewHolder(holder: SleepViewHolder, position: Int) {
         val sleepRec = sleeps[position]
         holder.textViewQualityvalue.text = sleepRec.quality.toString()
+
         holder.textViewStartDate.text = SimpleDateFormat("yyyy.MM.dd.HH:MM")
-            .format(sleepRec.startDate.toString())
+            .format(sleepRec.startDate)
+
         holder.textViewEndDate.text = SimpleDateFormat("yyyy.MM.dd.HH:MM")
-            .format(sleepRec.endDate.toString())
+            .format(sleepRec.endDate)
     }
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -37,5 +39,10 @@ class SleepAdapter internal constructor(
         val textViewQualityvalue: TextView = itemView.findViewById(R.id.textViewQualityValue)
         val textViewStartDate: TextView = itemView.findViewById(R.id.textViewStart)
         val textViewEndDate: TextView = itemView.findViewById(R.id.textViewEnd)
+    }
+
+    fun setSleep(sleeps: List<Sleep>) {
+        this.sleeps = sleeps
+        notifyDataSetChanged() //It will auto update data.
     }
 }

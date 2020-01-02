@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class Sleep (
     @PrimaryKey(autoGenerate = true) val id: Int,
     val startDate : Long = System.currentTimeMillis(), //Auto assign
-    val endDate : Long,
+    val endDate : Long = System.currentTimeMillis(),
     val quality : Int //1 to 5
 )

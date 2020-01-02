@@ -18,8 +18,8 @@ class SleepViewModel (application: Application): AndroidViewModel(application) {
         sleepList = sleepRepository.sleepList
     }
 
-    fun insert(sleep: Sleep) = viewModelScope.launch{
+    //Execute a coroutine
+    fun insertSleep(sleep: Sleep) = viewModelScope.launch{
         sleepRepository.insert(sleep)
     }
-
 }
